@@ -30,7 +30,8 @@
     "lit": "2.7.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.4.2"
+    "react-router-dom": "^6.4.2",
+    "validator": "^13.11.0"
   },
   "devDependencies": {
     "@lit-labs/react": "^1.1.0",
@@ -38,6 +39,7 @@
     "@rollup/pluginutils": "5.0.2",
     "@types/react": "^18.0.25",
     "@types/react-dom": "^18.0.8",
+    "@types/validator": "^13.11.1",
     "@vitejs/plugin-react": "4.0.0",
     "async": "3.2.2",
     "glob": "7.2.3",
@@ -81,7 +83,8 @@
     "@vaadin/vaadin-lumo-styles": "$@vaadin/vaadin-lumo-styles",
     "@hilla/generator-typescript-plugin-backbone": "$@hilla/generator-typescript-plugin-backbone",
     "@vaadin/vaadin-material-styles": "$@vaadin/vaadin-material-styles",
-    "@hilla/generator-typescript-cli": "$@hilla/generator-typescript-cli"
+    "@hilla/generator-typescript-cli": "$@hilla/generator-typescript-cli",
+    "validator": "$validator"
   },
   "vaadin": {
     "dependencies": {
@@ -128,6 +131,6 @@
       "workbox-core": "7.0.0",
       "workbox-precaching": "7.0.0"
     },
-    "hash": "234203eed7f66ec34a83dd3eecfc1122ddad7201faa1e23d639eae6ac41736d8"
+    "hash": "380b9859020ac177eef9336b6542e0a3dd576d9be02ba9157879620da59d7756"
   }
 }
