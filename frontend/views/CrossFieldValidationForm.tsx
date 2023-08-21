@@ -1,19 +1,28 @@
+import { AbstractModel, Validator } from "@hilla/form";
 import { Button } from "@hilla/react-components/Button.js";
 import { Notification } from "@hilla/react-components/Notification.js";
-import { TextField, TextFieldElement } from "@hilla/react-components/TextField.js";
-import { useBinder, useField } from "Frontend/form/binder";
-import { Validator } from "Frontend/form/src";
+import {
+  TextField,
+  TextFieldElement,
+} from "@hilla/react-components/TextField.js";
+import { FieldDirectiveResult, useBinder } from "@hilla/react-form";
 import Person from "Frontend/generated/com/example/application/endpoints/helloreact/Person";
 import PersonModel from "Frontend/generated/com/example/application/endpoints/helloreact/PersonModel";
 import { useRef } from "react";
 
 export default function CrossFieldValidationForm() {
   const binder = useBinder(PersonModel);
-  const email = useField(binder.model.email);
-  const otherEmail = useField(binder.model.otherEmail);
-  
+  const field = binder.field as <M extends AbstractModel<any>>(
+    model: M
+  ) => FieldDirectiveResult;
+  const email = field(binder.model.email);
+  const otherEmail = field(binder.model.otherEmail);
+
   const binder2 = useBinder(PersonModel);
-  const email2 = useField(binder2.model.email);
+  const field2 = binder2.field as <M extends AbstractModel<any>>(
+    model: M
+  ) => FieldDirectiveResult;
+  const email2 = field2(binder2.model.email);
   const uiOnlyEmailRef = useRef<TextFieldElement>(null);
   console.log("render", binder.value?.subscribe);
   return (
@@ -24,7 +33,7 @@ export default function CrossFieldValidationForm() {
         <TextField label="Your email again" {...otherEmail} />
         <Button
           onClick={async () => {
-            Notification.show(JSON.stringify(binder.root.value));
+            Notification.show(JSON.stringify(binder.value));
 
             const validator: Validator<Person> = {
               message:
@@ -49,7 +58,7 @@ export default function CrossFieldValidationForm() {
         <TextField label="Your email again" {...email2} />
         <Button
           onClick={async () => {
-            Notification.show(JSON.stringify(binder2.root.value));
+            Notification.show(JSON.stringify(binder2.value));
 
             const validator: Validator<Person> = {
               message:

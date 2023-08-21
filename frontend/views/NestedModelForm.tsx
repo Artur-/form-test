@@ -1,15 +1,20 @@
+import { AbstractModel } from "@hilla/form";
 import { Button } from "@hilla/react-components/Button.js";
 import { Notification } from "@hilla/react-components/Notification.js";
 import { TextField } from "@hilla/react-components/TextField.js";
-import { useBinder, useField } from "Frontend/form/binder";
+import { FieldDirectiveResult, useBinder } from "@hilla/react-form";
 import PersonModel from "Frontend/generated/com/example/application/endpoints/helloreact/PersonModel";
 
 export default function NestedModelForm() {
   const binder = useBinder(PersonModel);
-  const name = useField(binder.model.name);
-  const streetAddress = useField(binder.model.address.streetAddress);
-  const city = useField(binder.model.address.city);
-  const country = useField(binder.model.address.country);
+  const field = binder.field as <M extends AbstractModel<any>>(
+    model: M
+  ) => FieldDirectiveResult;
+
+  const name = field(binder.model.name);
+  const streetAddress = field(binder.model.address.streetAddress);
+  const city = field(binder.model.address.city);
+  const country = field(binder.model.address.country);
 
   const AddressForm = (
     <fieldset className="flex p-m gap-m items-end">
@@ -27,7 +32,7 @@ export default function NestedModelForm() {
         {AddressForm}
         <Button
           onClick={async () => {
-            Notification.show(JSON.stringify(binder.root.value));
+            Notification.show(JSON.stringify(binder.value));
           }}
         >
           Say hello

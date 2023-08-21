@@ -1,0 +1,4 @@
+[submodule "hilla"]
+	path = hilla
+	url = https://github.com/vaadin/hilla
+	branch = feat/react-form
